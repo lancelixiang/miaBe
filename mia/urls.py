@@ -24,5 +24,6 @@ router.register('users', views.UserView, 'User')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    path('eye/process_image/<img>', views.process_image, name='process_image'),
 ]
