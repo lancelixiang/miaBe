@@ -1,5 +1,6 @@
+import json
 from django.http import HttpResponse
-# from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets
 
 from .serializers import UserSerializer
@@ -11,6 +12,22 @@ from modules.classify import classify
 class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+
+
+@csrf_exempt
+def login(req):
+    if req.method == "POST":
+        print('**************', req.POST, type(req.POST))
+        datas = json.loads(req.body)
+        username = datas.get('username')
+        password = datas.get('password')
+
+        user = User.objects.filter(username=username, password=password)
+        res = {"result": "success" if len(user) >= 1 else "fail"}
+        return HttpResponse(json.dumps(res), status=200)
+
+    info = {'error': 'can not be a get method'}
+    return HttpResponse(json.dumps(info))
 
 
 def process_image(request, img):
