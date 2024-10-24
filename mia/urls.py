@@ -26,4 +26,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('eye/process_image/<img>', views.process_image, name='process_image'),
+    path('classify/classify_img/<img>', views.classify_img, name='classify_img'),
 ]
