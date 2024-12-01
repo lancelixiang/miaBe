@@ -41,7 +41,7 @@ class Check(object):
         return folders[-1].find(self.key_word) > -1
 
 
-def main(fileName, data_flag='pathmnist', gpu_ids='0', batch_size=128, model_path='/../../models/classify/best_model.pth'):
+def main(fileName, data_flag='pathmnist', gpu_ids='0', batch_size=128, model_path='/../../models/colone/best_model.pth'):
     info = INFO[data_flag]
     task = info['task']
     n_classes = len(info['label'])
@@ -63,7 +63,7 @@ def main(fileName, data_flag='pathmnist', gpu_ids='0', batch_size=128, model_pat
         transforms.Normalize(mean=[.5], std=[.5])])
 
     test_dataset = datasets.ImageFolder(
-        root= os.path.dirname(__file__) + '/../../models/classify/CRC', 
+        root= os.path.dirname(__file__) + '/../../models/colone/CRC', 
         transform=val_transform, 
         is_valid_file=Check(fileName)
         )

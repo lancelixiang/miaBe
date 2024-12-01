@@ -8,13 +8,13 @@ import matplotlib.pyplot as plt
 
 plt.switch_backend('agg')
 
-def process_img(img='0 (59).jpeg'):
+def main(img='0 (59).jpeg'):
     # Disable scientific notation for clarity
     plt.cla()
     np.set_printoptions(suppress=True)
 
     # Load the model
-    model = tensorflow.keras.models.load_model(os.path.dirname(__file__) + '/../../models/eye/keras_model.h5')
+    model = tensorflow.keras.models.load_model(os.path.dirname(__file__) + '/../../models/retina/keras_model.h5')
 
     # Create the array of the right shape to feed into the keras model
     # The 'length' or number of images you can put into the array is
@@ -22,7 +22,7 @@ def process_img(img='0 (59).jpeg'):
     data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
     # Replace this with the path to your image
-    image = Image.open(os.path.dirname(__file__) + '/../../models/eye/test/' + img)
+    image = Image.open(os.path.dirname(__file__) + '/../../models/retina/test/' + img)
 
     # resize the image to a 224x224 with the same strategy as in TM2:
     # resizing the image to be at least 224x224 and then cropping from the center
@@ -108,4 +108,4 @@ def process_img(img='0 (59).jpeg'):
     return result
 
 if __name__ == '__main__':
-    process_img('0 (59).jpeg')
+    main('0 (59).jpeg')

@@ -26,6 +26,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/login', views.login),
-    path('eye/process_image/<img>', views.process_image, name='process_image'),
-    path('classify/classify_img/<img>', views.classify_img, name='classify_img'),
+    path('models/retina/<img>', views.retina, name='retina'),
+    path('models/colone/<img>', views.colone, name='colone'),
 ]

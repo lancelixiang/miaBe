@@ -5,8 +5,8 @@ from rest_framework import viewsets
 
 from .serializers import UserSerializer
 from .models import User
-from modules.eye import process
-from modules.classify import classify
+from modules.retina import retinaDiag
+from modules.colone import coloneDiag
 
 
 class UserView(viewsets.ModelViewSet):
@@ -30,15 +30,15 @@ def login(req):
     return HttpResponse(json.dumps(info))
 
 
-def process_image(request, img):
+def retina(request, img):
     if request.method == 'GET':
-        # print('img', img)
-        response = process.process_img(img)
+        print('img', img)
+        response = retinaDiag.main(img)
         return HttpResponse(response, status=200)
 
 
-def classify_img(request, img):
+def colone(request, img):
     if request.method == 'GET':
         print('file name', img)
-        response = classify.main(fileName=img)
+        response = coloneDiag.main(fileName=img)
         return HttpResponse(response, status=200)
