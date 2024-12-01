@@ -5,6 +5,7 @@ from rest_framework import viewsets
 
 from .serializers import UserSerializer
 from .models import User
+from modules import uploadSave
 from modules.retina import retinaDiag
 from modules.colone import coloneDiag
 
@@ -17,7 +18,7 @@ class UserView(viewsets.ModelViewSet):
 @csrf_exempt
 def login(req):
     if req.method == "POST":
-        print('**************', req.POST, type(req.POST))
+        # print('**************', req.POST, type(req.POST))
         datas = json.loads(req.body)
         username = datas.get('username')
         password = datas.get('password')
@@ -30,15 +31,32 @@ def login(req):
     return HttpResponse(json.dumps(info))
 
 
+@csrf_exempt
+def upload(req):
+    if req.method == "POST":
+        filename = uploadSave.main(req)
+        res = {"result": "success", 'filename': filename}
+        return HttpResponse(json.dumps(res), status=200)
+
+    info = {'error': 'can not be a get method'}
+    return HttpResponse(json.dumps(info))
+
+
 def retina(request, img):
     if request.method == 'GET':
-        print('img', img)
+        # print('img', img)
         response = retinaDiag.main(img)
         return HttpResponse(response, status=200)
+
+    info = {'error': 'can not be a get method'}
+    return HttpResponse(json.dumps(info))
 
 
 def colone(request, img):
     if request.method == 'GET':
-        print('file name', img)
+        # print('file name', img)
         response = coloneDiag.main(fileName=img)
         return HttpResponse(response, status=200)
+
+    info = {'error': 'can not be a get method'}
+    return HttpResponse(json.dumps(info))
