@@ -18,7 +18,6 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from be import views
-# from django.views.decorators.csrf import csrf_exempt
 
 router = routers.DefaultRouter()
 # router.register('users', views.UserView, 'User')
@@ -32,4 +31,5 @@ urlpatterns = [
     path('api/upload', views.upload),
     path('api/models/retina/<dir>/<img>', views.retina, name='retina'),
     path('api/models/colone<dir>/<img>', views.colone, name='colone'),
+    path('api/get-csrf-token/', views.get_csrf_token, name='get_csrf_token'),
 ]

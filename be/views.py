@@ -1,8 +1,9 @@
 import json
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.middleware.csrf import get_token
 from rest_framework import viewsets
-# from django.utils.decorators import method_decorator
+from django.http import JsonResponse
 
 from .serializers import UserSerializer, PatientSerializer, DiagnosisSerializer
 from .models import User, Patient, Diagnosis
@@ -26,11 +27,14 @@ class DiagnosisView(viewsets.ModelViewSet):
     serializer_class = DiagnosisSerializer
     queryset = Diagnosis.objects.all()
 
+def get_csrf_token(request):
+    csrf_token = get_token(request)
+    return JsonResponse({'csrf_token': csrf_token})
+
 
 @csrf_exempt
 def login(req):
     if req.method == "POST":
-        # print('**************', req.POST, type(req.POST))
         datas = json.loads(req.body)
         username = datas.get('username')
         password = datas.get('password')
