@@ -2,9 +2,10 @@ import json
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets
+# from django.utils.decorators import method_decorator
 
-from .serializers import UserSerializer
-from .models import User
+from .serializers import UserSerializer, PatientSerializer, DiagnosisSerializer
+from .models import User, Patient, Diagnosis
 from modules import uploadSave
 from modules.retina import retinaDiag
 from modules.colone import coloneDiag
@@ -13,6 +14,17 @@ from modules.colone import coloneDiag
 class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+
+
+class PatientView(viewsets.ModelViewSet):
+    serializer_class = PatientSerializer
+    queryset = Patient.objects.all()
+
+
+# @method_decorator(csrf_exempt, name="dispatch")
+class DiagnosisView(viewsets.ModelViewSet):
+    serializer_class = DiagnosisSerializer
+    queryset = Diagnosis.objects.all()
 
 
 @csrf_exempt

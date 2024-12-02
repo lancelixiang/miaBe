@@ -18,9 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from be import views
+# from django.views.decorators.csrf import csrf_exempt
 
 router = routers.DefaultRouter()
-router.register('users', views.UserView, 'User')
+# router.register('users', views.UserView, 'User')
+router.register('patients', views.PatientView, 'Patients')
+router.register('diagnosis', views.DiagnosisView, 'Diagnosis')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
