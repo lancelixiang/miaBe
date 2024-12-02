@@ -27,6 +27,6 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/login', views.login),
     path('api/upload', views.upload),
-    path('models/retina/<img>', views.retina, name='retina'),
-    path('models/colone/<img>', views.colone, name='colone'),
+    path('api/models/retina/<dir>/<img>', views.retina, name='retina'),
+    path('api/models/colone<dir>/<img>', views.colone, name='colone'),
 ]

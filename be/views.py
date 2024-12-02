@@ -42,20 +42,20 @@ def upload(req):
     return HttpResponse(json.dumps(info))
 
 
-def retina(request, img):
+def retina(request, dir, img):
     if request.method == 'GET':
         # print('img', img)
-        response = retinaDiag.main(img)
+        response = retinaDiag.main(dir, img)
         return HttpResponse(response, status=200)
 
     info = {'error': 'can not be a get method'}
     return HttpResponse(json.dumps(info))
 
 
-def colone(request, img):
+def colone(request, dir, img):
     if request.method == 'GET':
         # print('file name', img)
-        response = coloneDiag.main(fileName=img)
+        response = coloneDiag.main(dir, fileName=img)
         return HttpResponse(response, status=200)
 
     info = {'error': 'can not be a get method'}
