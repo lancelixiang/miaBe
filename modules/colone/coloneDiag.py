@@ -63,7 +63,7 @@ def main(dir, fileName, data_flag='pathmnist', gpu_ids='0', batch_size=128, mode
         transforms.Normalize(mean=[.5], std=[.5])])
 
     test_dataset = datasets.ImageFolder(
-        root= os.path.dirname(__file__) + f'/../../upload/{dir}/', 
+        root= os.path.dirname(__file__) + f'/../../be/static/upload/{dir}/', 
         transform=val_transform, 
         is_valid_file=Check(fileName)
         )

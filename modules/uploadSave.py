@@ -4,7 +4,7 @@ from datetime import datetime
 
 def main(req):
     file = req.FILES['file']
-    fs = FileSystemStorage('./upload')
+    fs = FileSystemStorage('./be/static/upload')
     now = datetime.now()
     year = now.year
     month = now.month
