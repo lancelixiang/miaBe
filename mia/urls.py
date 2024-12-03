@@ -30,6 +30,6 @@ urlpatterns = [
     path('api/login', views.login),
     path('api/upload', views.upload),
     path('api/models/retina/<dir>/<img>', views.retina, name='retina'),
-    path('api/models/colone<dir>/<img>', views.colone, name='colone'),
+    path('api/models/colone/<dir>/<img>', views.colone, name='colone'),
     path('api/get-csrf-token/', views.get_csrf_token, name='get_csrf_token'),
 ]

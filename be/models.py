@@ -24,8 +24,8 @@ class Patient(models.Model):
 
 class Diagnosis(models.Model):
     patient = models.IntegerField(null=True)  # 关联患者
-    type = models.CharField(max_length=12)  # 模型类型
-    path = models.CharField(max_length=30)  # 图片/文件路径
+    type = models.CharField(max_length=20)  # 模型类型
+    path = models.CharField(max_length=100)  # 图片/文件路径
     isFile = models.BooleanField(default=True)  # 文件还是目录
-    res = models.TextField()  # 诊断结果
+    res = models.TextField()  # 诊断结果  图表路径-诊断结果-精度-诊断结果索引
     description = models.TextField(blank=True)

@@ -27,6 +27,7 @@ class DiagnosisView(viewsets.ModelViewSet):
     serializer_class = DiagnosisSerializer
     queryset = Diagnosis.objects.all()
 
+
 def get_csrf_token(request):
     csrf_token = get_token(request)
     return JsonResponse({'csrf_token': csrf_token})
