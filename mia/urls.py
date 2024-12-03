@@ -21,7 +21,7 @@ from be import views
 
 router = routers.DefaultRouter()
 # router.register('users', views.UserView, 'User')
-router.register('patients', views.PatientView, 'Patients')
+router.register('patient', views.PatientView, 'Patient')
 router.register('diagnosis', views.DiagnosisView, 'Diagnosis')
 
 urlpatterns = [

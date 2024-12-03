@@ -11,10 +11,10 @@ class User(models.Model):
 
 class Patient(models.Model):
     name = models.CharField(max_length=12)
-    age = models.IntegerField(blank=True)
-    sex = models.CharField(max_length=1, default='M', blank=True)
-    height = models.IntegerField(blank=True)
-    weight = models.IntegerField(blank=True)
+    age = models.IntegerField(null=True)
+    sex = models.CharField(max_length=1, blank=True)
+    height = models.IntegerField(null=True)
+    weight = models.IntegerField(null=True)
     liverDiagIds = models.TextField(blank=True)
     retinaDiagIds = models.TextField(blank=True)
     coloneDiagIds = models.TextField(blank=True)
@@ -23,7 +23,7 @@ class Patient(models.Model):
 
 
 class Diagnosis(models.Model):
-    patient = models.IntegerField(blank=True)  # 关联患者
+    patient = models.IntegerField(null=True)  # 关联患者
     type = models.CharField(max_length=12)  # 模型类型
     path = models.CharField(max_length=30)  # 图片/文件路径
     isFile = models.BooleanField(default=True)  # 文件还是目录
