@@ -44,7 +44,8 @@ def login(req):
         user = User.objects.filter(username=username, password=password)
         res = {
             "result": "success" if len(user) >= 1 else "fail",
-            'role': user[0].role
+            'role': user[0].role,
+            'id': user[0].id,
         }
         return HttpResponse(json.dumps(res), status=200)
 
@@ -59,7 +60,7 @@ def register(req):
         username = datas.get('username')
         password = datas.get('password')
 
-        user = User(username=username, password=password, CreateDate=timezone.now())
+        user = User(username=username, password=password, createDate=timezone.now())
         user.save()
         res = {"result": "success"}
         return HttpResponse(json.dumps(res), status=200)
