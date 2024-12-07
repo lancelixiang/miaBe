@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.middleware.csrf import get_token
 from rest_framework import viewsets
 from django.http import JsonResponse
+from django.utils import timezone
 
 from .serializers import UserSerializer, PatientSerializer, DiagnosisSerializer
 from .models import User, Patient, Diagnosis
@@ -41,7 +42,26 @@ def login(req):
         password = datas.get('password')
 
         user = User.objects.filter(username=username, password=password)
-        res = {"result": "success" if len(user) >= 1 else "fail"}
+        res = {
+            "result": "success" if len(user) >= 1 else "fail",
+            'role': user[0].role
+        }
+        return HttpResponse(json.dumps(res), status=200)
+
+    info = {'error': 'can not be a get method'}
+    return HttpResponse(json.dumps(info))
+
+
+@csrf_exempt
+def register(req):
+    if req.method == "POST":
+        datas = json.loads(req.body)
+        username = datas.get('username')
+        password = datas.get('password')
+
+        user = User(username=username, password=password, CreateDate=timezone.now())
+        user.save()
+        res = {"result": "success"}
         return HttpResponse(json.dumps(res), status=200)
 
     info = {'error': 'can not be a get method'}

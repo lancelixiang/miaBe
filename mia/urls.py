@@ -28,6 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/login', views.login),
+    path('api/register', views.register),
     path('api/upload', views.upload),
     path('api/models/retina/<dir>/<img>', views.retina, name='retina'),
     path('api/models/colone/<dir>/<img>', views.colone, name='colone'),

@@ -6,7 +6,9 @@ from django.db import models
 class User(models.Model):
     username = models.CharField(max_length=12)
     password = models.CharField(max_length=12)
+    role = models.CharField(max_length=12, blank=True)
     description = models.TextField(blank=True)
+    CreateDate = models.DateTimeField(null=True, blank=True)
 
 
 class Patient(models.Model):
@@ -20,6 +22,8 @@ class Patient(models.Model):
     coloneDiagIds = models.TextField(blank=True)
     gleasonDiagIds = models.TextField(blank=True)
     description = models.TextField(blank=True)
+    CreateBy = models.IntegerField(null=True)
+    CreateDate = models.DateTimeField(null=True, blank=True)
 
 
 class Diagnosis(models.Model):
@@ -29,3 +33,5 @@ class Diagnosis(models.Model):
     isFile = models.BooleanField(default=True)  # 文件还是目录
     res = models.TextField()  # 诊断结果  图表路径-诊断结果-精度-诊断结果索引
     description = models.TextField(blank=True)
+    CreateBy = models.IntegerField(null=True)
+    CreateDate = models.DateTimeField(null=True, blank=True)
