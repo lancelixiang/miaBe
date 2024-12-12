@@ -4,3 +4,4 @@ models
 upload
 modules/retina/output/*
 be/static/*
+package
