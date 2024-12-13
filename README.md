@@ -30,3 +30,8 @@ python mamba_test.py
 python mambaVision_test.py
 cd ..
 ```
+
+# 运行django
+```
+pip install django django-cors-headers djangorestframework tensorflow matplotlib medmnist
+```
