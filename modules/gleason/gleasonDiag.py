@@ -1,17 +1,16 @@
 import torch
 import numpy as np
 from PIL import Image
-import os
+import argparse
 
 import sys
 import os.path as osp
 rootDir = osp.dirname(osp.dirname(osp.dirname(__file__)))
 sys.path.insert(0, rootDir)
-
-from TissueMask import GaussianTissueMask
-from SuperpixelExtractor import ColorMergedSuperpixelExtractor
-from FeatureExtractor import AugmentedDeepFeatureExtractor
-from ViTLike import ViTLike
+from lib.ViTLike import ViTLike
+from lib.FeatureExtractor import AugmentedDeepFeatureExtractor
+from lib.SuperpixelExtractor import ColorMergedSuperpixelExtractor
+from lib.TissueMask import GaussianTissueMask
 
 Image.MAX_IMAGE_PIXELS = 100000000000
 
@@ -38,8 +37,7 @@ def get_feature_extractor(architecture):
 
 
 def main(dir='', img='16B0001851.png'):
-    image = np.array(Image.open(os.path.dirname(__file__) +
-                     f'/../../be/static/upload/{dir}/' + img))
+    image = np.array(Image.open(f'be/static/upload/{dir}/' + img))
     tissue_mask = tissue_detector.process(image)
     superpixels, _ = spx_extractor.process(image, tissue_mask)
 
@@ -59,5 +57,11 @@ def main(dir='', img='16B0001851.png'):
 
 
 if __name__ == '__main__':
-    res = main('202412', '16B0001851.png')
-    print('....................res', res)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--dir', default='', type=str)
+    parser.add_argument('--img', default='', type=str)
+    args = parser.parse_args()
+
+    # res = main('202412', '16B0001851.png')
+    res = main(args.dir, args.img)
+    print(res.tolist())

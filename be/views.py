@@ -5,6 +5,7 @@ from django.middleware.csrf import get_token
 from rest_framework import viewsets
 from django.http import JsonResponse
 from django.utils import timezone
+import subprocess
 
 from .serializers import UserSerializer, PatientSerializer, DiagnosisSerializer
 from .models import User, Patient, Diagnosis
@@ -61,7 +62,8 @@ def register(req):
         username = datas.get('username')
         password = datas.get('password')
 
-        user = User(username=username, password=password, createDate=timezone.now())
+        user = User(username=username, password=password,
+                    createDate=timezone.now())
         user.save()
         res = {"result": "success"}
         return HttpResponse(json.dumps(res), status=200)
@@ -100,11 +102,16 @@ def colone(request, dir, img):
     info = {'error': 'can not be a get method'}
     return HttpResponse(json.dumps(info))
 
+
 def gleason(request, dir, img):
     if request.method == 'GET':
-        # print('img', img)
-        response = gleasonDiag.main(dir, img)
-        return HttpResponse(response, status=200)
+        script_path = 'modules/gleason/gleasonDiag.py'
+        try:
+            response = subprocess.run(
+                ['python', script_path, '--dir', dir, '--img', img], capture_output=True, text=True, check=True)
+            return HttpResponse(response.stdout, status=200)
+        except subprocess.CalledProcessError as e:
+            return HttpResponse('error', status=500)
 
     info = {'error': 'can not be a get method'}
     return HttpResponse(json.dumps(info))

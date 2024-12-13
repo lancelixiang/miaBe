@@ -8,17 +8,17 @@ cuda: 11.8
 
 # conda环境和torch
 ```
-conda create -n gleason_web_be python=3.12 -y
-conda activate gcode
+conda create -n gleason_web_be python=3.10 -y
+conda activate gleason_web_be
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 ```
 
 # mambaVision 安装
 需要causal_conv1d的可以从下面的网址去下载，这里用的是1.4.0。
-文件名的cu118为cuda11.8，cp312即为python 3.12，这两个一定要对上。
+文件名的cu118为cuda11.8，cp310即为python 3.10，这两个一定要对上。
 下载 [causal_conv1d-1.4.0](https://github.com/Dao-AILab/causal-conv1d/releases) 后放在 /package 目录下，用下面命令安装。
 ```
-pip install package/causal_conv1d-1.4.0+cu118torch2.4cxx11abiTRUE-cp312-cp312-linux_x86_64.whl
+pip install package/causal_conv1d-1.4.0+cu118torch2.4cxx11abiTRUE-cp310-cp310-linux_x86_64.whl
 pip install einops huggingface_hub transformers timm
 ```
 
