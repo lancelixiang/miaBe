@@ -11,6 +11,7 @@ from .models import User, Patient, Diagnosis
 from modules import uploadSave
 from modules.retina import retinaDiag
 from modules.colone import coloneDiag
+from modules.gleason import gleasonDiag
 
 
 class UserView(viewsets.ModelViewSet):
@@ -94,6 +95,15 @@ def colone(request, dir, img):
     if request.method == 'GET':
         # print('file name', img)
         response = coloneDiag.main(dir, fileName=img)
+        return HttpResponse(response, status=200)
+
+    info = {'error': 'can not be a get method'}
+    return HttpResponse(json.dumps(info))
+
+def gleason(request, dir, img):
+    if request.method == 'GET':
+        # print('img', img)
+        response = gleasonDiag.main(dir, img)
         return HttpResponse(response, status=200)
 
     info = {'error': 'can not be a get method'}
