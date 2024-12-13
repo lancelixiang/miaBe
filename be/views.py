@@ -10,9 +10,6 @@ import subprocess
 from .serializers import UserSerializer, PatientSerializer, DiagnosisSerializer
 from .models import User, Patient, Diagnosis
 from modules import uploadSave
-from modules.retina import retinaDiag
-from modules.colone import coloneDiag
-from modules.gleason import gleasonDiag
 
 
 class UserView(viewsets.ModelViewSet):
@@ -78,26 +75,6 @@ def upload(req):
         filename = uploadSave.main(req)
         res = {"result": "success", 'filename': filename}
         return HttpResponse(json.dumps(res), status=200)
-
-    info = {'error': 'can not be a get method'}
-    return HttpResponse(json.dumps(info))
-
-
-def retina(request, dir, img):
-    if request.method == 'GET':
-        # print('img', img)
-        response = retinaDiag.main(dir, img)
-        return HttpResponse(response, status=200)
-
-    info = {'error': 'can not be a get method'}
-    return HttpResponse(json.dumps(info))
-
-
-def colone(request, dir, img):
-    if request.method == 'GET':
-        # print('file name', img)
-        response = coloneDiag.main(dir, fileName=img)
-        return HttpResponse(response, status=200)
 
     info = {'error': 'can not be a get method'}
     return HttpResponse(json.dumps(info))
